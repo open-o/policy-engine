@@ -1,0 +1,10 @@
+template: Hello, %s!
+defaultName: openo-policy-engine
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 9099
+  adminConnectors:
+    - type: http
+      port: 9098
