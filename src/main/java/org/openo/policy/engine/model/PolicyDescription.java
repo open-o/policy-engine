@@ -13,11 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openo.policy;
+package org.openo.policy.engine.model;
 
-public class StringFormatTest {
-    public static void main(String[] args) {
-        String name = "hello world!";
-        System.out.println(String.format(name, "TEST"));
-    }
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class PolicyDescription {
+
+	@JsonProperty
+    private String nslId;
+
+    @JsonProperty
+    private String fileUri;
+
+    
+    public String getNslId() {
+		return nslId;
+	}
+
+	public void setNslId(String nslId) {
+		this.nslId = nslId;
+	}
+
+	public String getFileUri() {
+		return fileUri;
+	}
+
+	public void setFileUri(String fileUri) {
+		this.fileUri = fileUri;
+	}
+
 }
