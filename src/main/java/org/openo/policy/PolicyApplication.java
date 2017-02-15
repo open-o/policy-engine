@@ -15,14 +15,12 @@
  */
 package org.openo.policy;
 
-import org.openo.policy.resources.PolicyResource;
-import org.openo.policy.resources.EventResource;
-
+import org.openo.policy.engine.resources.PolicyEventResource;
+import org.openo.policy.engine.resources.PolicyRuleResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import com.google.common.base.MoreObjects;
 
 /**
  * Created by 10184056 on 2016/8/19.
@@ -45,7 +43,7 @@ public class PolicyApplication extends Application<PolicyEngineConfiguration> {
     @Override
     public void run(PolicyEngineConfiguration configuration,  Environment environment) {
 
-        environment.jersey().register(new PolicyResource(configuration.getTemplate(), configuration.getDefaultName()));
-        environment.jersey().register(new EventResource());
+        environment.jersey().register(new PolicyEventResource());
+        environment.jersey().register(new PolicyRuleResource());
     }
 }

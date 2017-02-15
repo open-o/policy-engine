@@ -13,11 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openo.policy;
+package org.openo.policy.engine.model;
 
-public class StringFormatTest {
-    public static void main(String[] args) {
-        String name = "hello world!";
-        System.out.println(String.format(name, "TEST"));
-    }
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
+
+public class PolicyEventTest {
+
+	@Test
+	public void testPolicyEventGetAndSetMethod() {
+		PolicyEvent event = new PolicyEvent();
+		event.setObjectName("mysql-11");
+		event.setObjecttype("db");
+		event.setMetricName("cpu");
+		event.setMetricValue(90);
+
+        assertThat(event.getObjectName()).isEqualTo("mysql-11");
+        assertThat(event.getMetricName()).isEqualTo("cpu");
+	}
+
 }
