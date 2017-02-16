@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openo.policy;
+package org.openo.policy.engine;
 
 import org.openo.policy.engine.resources.PolicyEventResource;
 import org.openo.policy.engine.resources.PolicyRuleResource;
@@ -30,9 +30,9 @@ import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 
 
-public class PolicyApplication extends Application<PolicyEngineConfiguration> {
+public class PolicyEngineApp extends Application<PolicyEngineConfig> {
     public static void main(String[] args) throws Exception {
-        new PolicyApplication().run(args);
+        new PolicyEngineApp().run(args);
     }
 
     @Override
@@ -41,12 +41,12 @@ public class PolicyApplication extends Application<PolicyEngineConfiguration> {
     }
 
     @Override
-    public void initialize(Bootstrap<PolicyEngineConfiguration> bootstrap) {
+    public void initialize(Bootstrap<PolicyEngineConfig> bootstrap) {
         bootstrap.addBundle(new AssetsBundle("/api-doc", "/api-doc", "index.html", "api-doc"));
     }
 
     @Override
-    public void run(PolicyEngineConfiguration configuration,  Environment environment) {
+    public void run(PolicyEngineConfig configuration,  Environment environment) {
 
         environment.jersey().register(new PolicyEventResource());
         environment.jersey().register(new PolicyRuleResource());
@@ -54,7 +54,7 @@ public class PolicyApplication extends Application<PolicyEngineConfiguration> {
     }
     
     
-    private void initSwaggerConfig(PolicyEngineConfiguration configuration, Environment environment) {
+    private void initSwaggerConfig(PolicyEngineConfig configuration, Environment environment) {
         environment.jersey().register(new ApiListingResource());
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 

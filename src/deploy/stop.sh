@@ -17,7 +17,7 @@
 
 DIRNAME=`dirname $0`
 HOME=`cd $DIRNAME/; pwd`
-Main_Class="org.openo.policy.PolicyApplication"
+Main_Class="org.openo.policy.engine.PolicyEngineApp"
 
 echo ================== policy-engine info =============================================
 echo HOME=$HOME

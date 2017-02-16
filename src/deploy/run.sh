@@ -30,5 +30,5 @@ echo @JAVA_OPTS@ $JAVA_OPTS
 class_path="$RUNHOME/:$RUNHOME/policy-engine.jar"
 echo @class_path@ $class_path
 
-"$JAVA" $JAVA_OPTS -classpath "$class_path" org.openo.policy.PolicyApplication server "$RUNHOME/conf/engine.yml"
+"$JAVA" $JAVA_OPTS -classpath "$class_path" org.openo.policy.engine.PolicyEngineApp server "$RUNHOME/conf/engine.yml"
 

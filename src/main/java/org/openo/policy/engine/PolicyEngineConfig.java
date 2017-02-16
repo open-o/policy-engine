@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openo.policy;
+package org.openo.policy.engine;
 
 
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class PolicyEngineConfiguration extends Configuration {
+public class PolicyEngineConfig extends Configuration {
     @NotEmpty
     private String template;
     @NotEmpty

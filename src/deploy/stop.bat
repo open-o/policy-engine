@@ -18,7 +18,7 @@
 title stopping policy-engine
 
 set HOME=%~dp0
-set Main_Class="org.openo.policy.PolicyApplication"
+set Main_Class="org.openo.policy.engine.PolicyEngineApp"
 
 echo ================== policy-engine info =============================================
 echo HOME=$HOME

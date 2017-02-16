@@ -28,7 +28,7 @@ set class_path=%RUNHOME%;%RUNHOME%policy-engine.jar
 echo ### jvm_opts: %jvm_opts%
 echo ### class_path: %class_path%
 
-%JAVA% -classpath %class_path% %jvm_opts% org.openo.policy.PolicyApplication server %RUNHOME%/conf/engine.yml
+%JAVA% -classpath %class_path% %jvm_opts% org.openo.policy.engine.PolicyEngineApp server %RUNHOME%/conf/engine.yml
 
 IF ERRORLEVEL 1 goto showerror
 exit
