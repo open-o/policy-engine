@@ -92,11 +92,6 @@ public class PolicyEvent {
 			return false;
 
 		PolicyEvent that = (PolicyEvent) o;
-
-		if (metricValue != that.metricValue)
-			return false;
-		if (timestamp != that.timestamp)
-			return false;
 		if (!objectName.equals(that.objectName))
 			return false;
 		if (!objectType.equals(that.objectType))
