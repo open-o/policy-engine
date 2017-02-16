@@ -18,13 +18,18 @@ package org.openo.policy;
 import org.openo.policy.engine.resources.PolicyEventResource;
 import org.openo.policy.engine.resources.PolicyRuleResource;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import io.dropwizard.Application;
+import io.dropwizard.server.SimpleServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-/**
- * Created by 10184056 on 2016/8/19.
- */
+import io.dropwizard.assets.AssetsBundle;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+
+
 public class PolicyApplication extends Application<PolicyEngineConfiguration> {
     public static void main(String[] args) throws Exception {
         new PolicyApplication().run(args);
@@ -37,7 +42,7 @@ public class PolicyApplication extends Application<PolicyEngineConfiguration> {
 
     @Override
     public void initialize(Bootstrap<PolicyEngineConfiguration> bootstrap) {
-        // nothing to do yet
+        bootstrap.addBundle(new AssetsBundle("/api-doc", "/api-doc", "index.html", "api-doc"));
     }
 
     @Override
@@ -45,5 +50,28 @@ public class PolicyApplication extends Application<PolicyEngineConfiguration> {
 
         environment.jersey().register(new PolicyEventResource());
         environment.jersey().register(new PolicyRuleResource());
+        initSwaggerConfig(configuration, environment);
+    }
+    
+    
+    private void initSwaggerConfig(PolicyEngineConfiguration configuration, Environment environment) {
+        environment.jersey().register(new ApiListingResource());
+        environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        BeanConfig config = new BeanConfig();
+        config.setTitle("Open-O POLICY-ENGINE API");
+        config.setVersion("1.1.0");
+        config.setResourcePackage("org.openo.policy");
+        // set rest api base path in swagger
+        SimpleServerFactory serverFactory =
+            (SimpleServerFactory) configuration.getServerFactory();
+        String basePath = serverFactory.getApplicationContextPath();
+        String rootPath = serverFactory.getJerseyRootPath();
+        rootPath = rootPath.substring(0, rootPath.indexOf("/*"));
+        basePath =
+            ("/").equals(basePath) ? rootPath : (new StringBuilder()).append(basePath).append(rootPath)
+                .toString();
+        config.setBasePath(basePath);
+        config.setScan(true);
     }
 }

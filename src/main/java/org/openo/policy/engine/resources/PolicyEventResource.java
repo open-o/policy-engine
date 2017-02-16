@@ -23,8 +23,11 @@ import javax.ws.rs.core.Response;
 
 import org.openo.policy.engine.model.PolicyEvent;
 
+import io.swagger.annotations.Api;
+
 @Path("/openoapi/polengine/v1")
 @Produces({MediaType.APPLICATION_JSON})
+@Api(tags = {"Policy Engine API"})
 public class PolicyEventResource {
 	
     @POST

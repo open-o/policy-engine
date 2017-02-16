@@ -25,10 +25,12 @@ import javax.ws.rs.core.Response;
 import org.jvnet.hk2.annotations.Service;
 import org.openo.policy.engine.model.PolicyDescription;
 
+import io.swagger.annotations.Api;
+
 
 @Path("/openoapi/polengine/v1")
 @Produces({MediaType.APPLICATION_JSON})
-
+@Api(tags = {"Policy Engine API"})
 @Service
 public class PolicyRuleResource {
 
