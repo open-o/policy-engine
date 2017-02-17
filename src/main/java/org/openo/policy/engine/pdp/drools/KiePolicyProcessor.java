@@ -15,10 +15,51 @@
  */
 package org.openo.policy.engine.pdp.drools;
 
+import org.kie.api.runtime.KieSession;
 import org.openo.policy.engine.pdp.PolicyProcessor;
 import org.openo.policy.engine.pep.PolicyAction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class KiePolicyProcessor implements PolicyProcessor{
+public class KiePolicyProcessor implements PolicyProcessor {
+	
+	private final Logger logger = LoggerFactory.getLogger(KiePolicyProcessor.class.getName());
+
+	private String name;
+
+	private String groupId;
+
+	private String artifactId;
+
+	private String version;
+
+	private KieSession kieSession;
+
+
+	public KiePolicyProcessor(String name, String groupId, String artifactId, String version) {
+		checkParameters(name, groupId, artifactId, version);
+
+		this.name = name;
+		this.groupId = groupId;
+		this.artifactId = artifactId;
+		this.version = version;
+	}
+
+	private void checkParameters(String name, String groupId, String artifactId, String version) {
+		checkParameter(name, "Engine name can not be empty!");
+
+		checkParameter(groupId, "groupId can not be empty!");
+
+		checkParameter(artifactId, "artifactId can not be empty!");
+
+		checkParameter(version, "version can not be empty!");
+	}
+
+	private void checkParameter(String content, String s) {
+		if (content == null || "".equals(content)) {
+			throw new IllegalArgumentException(s);
+		}
+	}
 
 	@Override
 	public String getName() {
@@ -29,13 +70,13 @@ public class KiePolicyProcessor implements PolicyProcessor{
 	@Override
 	public void insert(Object fact) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -47,25 +88,25 @@ public class KiePolicyProcessor implements PolicyProcessor{
 	@Override
 	public void reload() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPolicyAction(PolicyAction action) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unregisterChannel() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
