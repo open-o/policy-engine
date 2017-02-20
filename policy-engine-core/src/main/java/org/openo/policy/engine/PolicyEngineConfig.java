@@ -18,31 +18,57 @@ package org.openo.policy.engine;
 
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.Valid;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class PolicyEngineConfig extends Configuration {
     @NotEmpty
-    private String template;
-    @NotEmpty
-    private String defaultName = "Stranger";
-
     @JsonProperty
+    private String template;
+    
+    @NotEmpty
+    @JsonProperty
+    private String defaultName = "Stranger";
+    
+	@NotEmpty
+	@JsonProperty
+    private String msbServerAddr;
+    
+    @Valid
+    @JsonProperty
+    private String serviceIp;
+
     public String getTemplate() {
         return template;
     }
 
-    @JsonProperty
     public void setTemplate(String template) {
         this.template = template;
     }
 
-    @JsonProperty
     public String getDefaultName() {
         return defaultName;
     }
 
-    @JsonProperty
     public void setDefaultName(String name) {
         this.defaultName = name;
     }
+    
+    public String getMsbServerAddr() {
+		return msbServerAddr;
+	}
+
+	public void setMsbServerAddr(String msbServerAddr) {
+		this.msbServerAddr = msbServerAddr;
+	}
+
+	public String getServiceIp() {
+		return serviceIp;
+	}
+
+	public void setServiceIp(String serviceIp) {
+		this.serviceIp = serviceIp;
+	}
 }

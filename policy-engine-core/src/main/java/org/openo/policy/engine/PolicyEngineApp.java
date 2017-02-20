@@ -15,17 +15,17 @@
  */
 package org.openo.policy.engine;
 
+import org.openo.policy.engine.msbregister.ServiceRegister;
 import org.openo.policy.engine.resources.PolicyEventResource;
 import org.openo.policy.engine.resources.PolicyRuleResource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.server.SimpleServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
-import io.dropwizard.assets.AssetsBundle;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 
@@ -50,7 +50,15 @@ public class PolicyEngineApp extends Application<PolicyEngineConfig> {
 
         environment.jersey().register(new PolicyEventResource());
         environment.jersey().register(new PolicyRuleResource());
+        startRegisterService(configuration.getMsbServerAddr(),configuration.getServiceIp());
         initSwaggerConfig(configuration, environment);
+    }
+    
+    
+    private void startRegisterService(String msbServerAddr,String serviceIp) {
+        Thread registerService = new Thread(new ServiceRegister(msbServerAddr,serviceIp));
+        registerService.setName("register policy engine service to Microservice Bus");
+        registerService.start();
     }
     
     

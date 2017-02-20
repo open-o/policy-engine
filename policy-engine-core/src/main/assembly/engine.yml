@@ -16,6 +16,11 @@
 template: Hello, %s!
 defaultName: openo-policy-engine
 
+# the micro service ip
+serviceIp:
+# msb server address
+msbServerAddr: http://127.0.0.1:80
+
 server:
   type: simple
   applicationContextPath: /
