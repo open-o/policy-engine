@@ -3,3 +3,11 @@
 target/
 log/
 logs/
+build/
+.gradle/
+.project
+.classpath
+.class
+bin/
+.settings/
+dependency-reduced-pom.xml
