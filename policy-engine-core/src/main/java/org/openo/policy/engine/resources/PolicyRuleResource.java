@@ -28,7 +28,7 @@ import org.openo.policy.engine.model.PolicyDescription;
 import io.swagger.annotations.Api;
 
 
-@Path("/openoapi/polengine/v1")
+@Path("/")
 @Produces({MediaType.APPLICATION_JSON})
 @Api(tags = {"Policy Engine API"})
 @Service
@@ -36,7 +36,7 @@ public class PolicyRuleResource {
 
 
     @POST
-    @Path("policyinfo")
+    @Path("/policyinfo")
     public Response policyInfo(PolicyDescription policyDescription) {
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());

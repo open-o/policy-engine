@@ -46,7 +46,7 @@ public class PolicyRuleResourceTest {
 	}
 
 	private Response postToMessage(Object message) {
-		return resources.client().target("/openoapi/polengine/v1/policyinfo/").request().post(Entity.json(message));
+		return resources.client().target("/policyinfo/").request().post(Entity.json(message));
 	}
 
 }
