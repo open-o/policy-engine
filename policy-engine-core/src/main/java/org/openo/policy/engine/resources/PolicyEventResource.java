@@ -25,13 +25,13 @@ import org.openo.policy.engine.model.PolicyEvent;
 
 import io.swagger.annotations.Api;
 
-@Path("/openoapi/polengine/v1")
+@Path("/")
 @Produces({MediaType.APPLICATION_JSON})
 @Api(tags = {"Policy Engine API"})
 public class PolicyEventResource {
 	
     @POST
-    @Path("policyevent")
+    @Path("/policyevent")
     public Response acceptPolicyEvent(PolicyEvent policyEvent) {
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());
