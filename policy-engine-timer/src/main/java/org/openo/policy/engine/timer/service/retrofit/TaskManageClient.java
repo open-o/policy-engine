@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package org.openo.policy.engine.timer;
+package org.openo.policy.engine.timer.service.retrofit;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import java.util.Map;
 
-import org.openo.policy.engine.timer.entity.ServerConfig;
+import retrofit2.Call;
+import retrofit2.http.GET;
 
-import io.dropwizard.Configuration;
+@FunctionalInterface
+public interface TaskManageClient {
 
-public class TimerConfiguration extends Configuration {
+    @GET("task/all-active")
+    Call<List<Map>> queryAllTasks();
 
-    @JsonProperty("taskManagerServer")
-    private ServerConfig taskManagerServer;
-
-    @JsonProperty("taskEnforcementServer")
-    private ServerConfig taskEnforcementServer;
 }
