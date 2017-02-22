@@ -1,4 +1,18 @@
+taskManagerServer:
+  ip: 127.0.0.1
+  port: 9423
+  uri: /api/task-manager/v1/
+  isAutoDiscover: ${AUTO_DISCOVER:-false}
+  serviceName: ${TASK_MANAGER_SERVICE_NAME:-policy-taskmanager}
+  serviceVersion: ${TASK_MANAGER_SERVICE_VERSION:-v1}
 
+taskEnforcementServer:
+  ip: 127.0.0.1
+  port: 9424
+  uri: /api/policy/v1/
+  isAutoDiscover: ${AUTO_DISCOVER:-false}
+  serviceName: ${TASK_ENFORCEMENT_SERVICE_NAME:-policy-enforcement}
+  serviceVersion: ${TASK_ENFORCEMENT_SERVICE_VERSION:-v1}
 
 # Logging settings.
 logging:

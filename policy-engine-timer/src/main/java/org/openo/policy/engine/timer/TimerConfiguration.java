@@ -16,8 +16,15 @@
 
 package org.openo.policy.engine.timer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import org.openo.policy.engine.timer.entity.ServerConfig;
 
 public class TimerConfiguration extends Configuration {
 
+    @JsonProperty("taskManagerServer")
+    private ServerConfig taskManagerServer;
+
+    @JsonProperty("taskEnforcementServer")
+    private ServerConfig taskEnforcementServer;
 }

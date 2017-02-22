@@ -16,16 +16,15 @@
 
 package org.openo.policy.engine.timer;
 
-import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.openo.dropwizard.ioc.bundle.IOCApplication;
 
-public class TimerApplication extends Application<TimerConfiguration> {
+public class TimerApplication extends IOCApplication<TimerConfiguration> {
     @Override
     public void run(TimerConfiguration configuration, Environment environment) throws Exception {
-
     }
 
     @Override
