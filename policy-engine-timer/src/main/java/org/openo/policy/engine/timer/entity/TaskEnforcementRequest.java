@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package org.openo.policy.engine.timer;
+package org.openo.policy.engine.timer.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.openo.policy.engine.timer.entity.ServerConfig;
+import java.util.Map;
 
-import io.dropwizard.Configuration;
+public class TaskEnforcementRequest {
+    @JsonProperty
+    private String id;
 
-public class TimerConfiguration extends Configuration {
+    @JsonProperty
+    private String scriptName;
 
-    @JsonProperty("taskManagerServer")
-    private ServerConfig taskManagerServer;
+    @JsonProperty
+    private Map<String, Object> parameters;
 
-    @JsonProperty("taskEnforcementServer")
-    private ServerConfig taskEnforcementServer;
+    public TaskEnforcementRequest(String id, String scriptName, Map<String, Object> parameters) {
+        this.id = id;
+        this.scriptName = scriptName;
+        this.parameters = parameters;
+    }
+
+    private TaskEnforcementRequest() {
+    }
 }
