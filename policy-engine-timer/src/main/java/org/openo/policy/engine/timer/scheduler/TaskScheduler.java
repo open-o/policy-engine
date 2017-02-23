@@ -20,7 +20,7 @@ package org.openo.policy.engine.timer.scheduler;
 import org.openo.policy.engine.timer.entity.task.Task;
 
 public interface TaskScheduler<T extends Task> {
-    
+
     void addTask(T t);
 
     void deleteTask(T t);

@@ -17,7 +17,6 @@
 package org.openo.policy.engine.timer.service.retrofit;
 
 import org.openo.policy.engine.timer.entity.TaskEnforcementRequest;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
