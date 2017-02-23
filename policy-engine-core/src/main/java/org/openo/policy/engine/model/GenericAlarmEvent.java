@@ -18,23 +18,38 @@ package org.openo.policy.engine.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GenericAlarmEvent {
+	
+	@JsonProperty
+	private String nsId;
 
 	@JsonProperty
-	protected String objectName;
+	private String objectName;
 	
 	@JsonProperty
-	protected String objectType;
+	private String objectType;
 	
 	@JsonProperty
-	protected String metricName;
+	private String metricName;
 	
 	@JsonProperty
-	protected double metricValue;
+	private double metricValue;
 	
 	@JsonProperty
-	protected long timestamp;
+	private long timestamp;
 
 	public GenericAlarmEvent() {
+	}
+	
+	public String getNsId() {
+		return nsId;
+	}
+
+	public void setNsId(String nsId) {
+		this.nsId = nsId;
+	}
+
+	public void setObjectType(String objectType) {
+		this.objectType = objectType;
 	}
 
 	public String getObjectName() {
@@ -77,40 +92,5 @@ public class GenericAlarmEvent {
 		this.timestamp = timestamp;
 	}
 
-	@Override
-	public String toString() {
-		return "PolicyEvent{" + "objectName='" + objectName + '\'' + ", objectType='" + objectType + '\''
-				+ ", metricName='" + metricName + '\'' + ", metricValue=" + metricValue + ", timestamp=" + timestamp
-				+ '}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		GenericAlarmEvent that = (GenericAlarmEvent) o;
-		if (!objectName.equals(that.objectName))
-			return false;
-		if (!objectType.equals(that.objectType))
-			return false;
-		return metricName.equals(that.metricName);
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result;
-		long temp;
-		result = objectName != null ? objectName.hashCode() : 0;
-		result = 31 * result + (objectType != null ? objectType.hashCode() : 0);
-		result = 31 * result + (metricName != null ? metricName.hashCode() : 0);
-		temp = Double.doubleToLongBits(metricValue);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
-		return result;
-	}
 
 }

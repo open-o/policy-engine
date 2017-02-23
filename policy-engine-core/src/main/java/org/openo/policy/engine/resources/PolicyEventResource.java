@@ -21,11 +21,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.openo.policy.engine.model.GenericAlarmEvent;
 import org.openo.policy.engine.model.PolicyEvent;
 
 import io.swagger.annotations.Api;
 
-@Path("/")
+@Path("/policyevent")
 @Produces({MediaType.APPLICATION_JSON})
 @Api(tags = {"Policy Engine API"})
 public class PolicyEventResource {
@@ -33,6 +34,14 @@ public class PolicyEventResource {
     @POST
     @Path("/policyevent")
     public Response acceptPolicyEvent(PolicyEvent policyEvent) {
+       
+        return response(new String("OK"), Response.Status.OK.getStatusCode());
+    }
+    
+    
+    @POST
+    @Path("/alarm")
+    public Response acceptPolicyEvent(GenericAlarmEvent genericAlarmEvent) {
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());
     }

@@ -48,7 +48,7 @@ public class PolicyEventResourceTest {
 	}
 
 	private Response postToMessage(Object message) {
-		return resources.client().target("/policyevent").request().post(Entity.json(message));
+		return resources.client().target("/policyevent/policyevent").request().post(Entity.json(message));
 	}
 
 }

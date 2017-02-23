@@ -22,6 +22,10 @@ public class ResourceWrapper {
 	private Resource resource;
 
 	private String targetResourceName;
+	
+	public ResourceWrapper(){
+		
+	}
 
 	public ResourceWrapper(Resource resource, String targetResourceName) {
 		this.resource = resource;

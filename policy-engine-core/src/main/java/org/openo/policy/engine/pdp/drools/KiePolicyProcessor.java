@@ -15,7 +15,14 @@
  */
 package org.openo.policy.engine.pdp.drools;
 
+import org.drools.compiler.kie.builder.impl.InternalKieModule;
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieRepository;
+import org.kie.api.builder.ReleaseId;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.io.ResourceFactory;
+import org.openo.policy.engine.model.PolicyId;
 import org.openo.policy.engine.pdp.PolicyProcessor;
 import org.openo.policy.engine.pep.PolicyAction;
 import org.slf4j.Logger;
@@ -25,64 +32,49 @@ public class KiePolicyProcessor implements PolicyProcessor {
 	
 	private final Logger logger = LoggerFactory.getLogger(KiePolicyProcessor.class.getName());
 
-	private String name;
-
-	private String groupId;
-
-	private String artifactId;
-
-	private String version;
+	private PolicyId policyId;
+	
+	private KieServices kieServices;
 
 	private KieSession kieSession;
 
 
-	public KiePolicyProcessor(String name, String groupId, String artifactId, String version) {
-		checkParameters(name, groupId, artifactId, version);
+	public KiePolicyProcessor(PolicyId policyId) {
+		this.policyId = policyId;
+        this.kieServices = KieServices.Factory.get();
 
-		this.name = name;
-		this.groupId = groupId;
-		this.artifactId = artifactId;
-		this.version = version;
+        
 	}
-
-	private void checkParameters(String name, String groupId, String artifactId, String version) {
-		checkParameter(name, "Engine name can not be empty!");
-
-		checkParameter(groupId, "groupId can not be empty!");
-
-		checkParameter(artifactId, "artifactId can not be empty!");
-
-		checkParameter(version, "version can not be empty!");
-	}
-
-	private void checkParameter(String content, String s) {
-		if (content == null || "".equals(content)) {
-			throw new IllegalArgumentException(s);
-		}
-	}
-
+	
 	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void newSession(String url){
+		String groupId = policyId.getGroupId();
+		String artifactId = policyId.getArtifactId();
+		String version = policyId.getVersion();
+		final ReleaseId releaseId = kieServices.newReleaseId(groupId, artifactId, version);  
+		ResourceWrapper resourceWrapper = new ResourceWrapper();
+		//ResourceFactory.newUrlResource("http://10.92.217.139:8080/test/my.drl")
+		resourceWrapper.setResource(ResourceFactory.newUrlResource(url));
+		resourceWrapper.setTargetResourceName(artifactId);
+		// 创建初始化的kjar  
+        InternalKieModule kJar = KieJarFactory.createKieJar(kieServices, releaseId, resourceWrapper);
+        KieRepository repository = kieServices.getRepository();  
+        repository.addKieModule(kJar);  
+        KieContainer kieContainer = kieServices.newKieContainer(releaseId);  
+        this.kieSession = kieContainer.newKieSession();  
 	}
+
 
 	@Override
 	public void insert(Object fact) {
-		// TODO Auto-generated method stub
-
+		  this.kieSession.insert(fact);
 	}
 
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public int fire() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.kieSession.fireAllRules();
+	
 	}
 
 	@Override
@@ -93,20 +85,22 @@ public class KiePolicyProcessor implements PolicyProcessor {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		this.kieSession.dispose();
 
 	}
 
 	@Override
-	public void setPolicyAction(PolicyAction action) {
-		// TODO Auto-generated method stub
-
+	public void setPolicyAction(String identifier,PolicyAction action) {
+		if(action != null){
+			this.kieSession.setGlobal(identifier, action);
+		}
 	}
 
 	@Override
-	public void unregisterChannel() {
+	public PolicyId getPolicyId() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
+	
 }

@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jvnet.hk2.annotations.Service;
+import org.openo.policy.engine.model.PolicyBaseDescr;
 import org.openo.policy.engine.model.PolicyDescription;
 
 import io.swagger.annotations.Api;
@@ -40,6 +41,15 @@ public class PolicyRuleResource {
     public Response policyInfo(PolicyDescription policyDescription) {
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());
+    }
+    
+    
+    @POST
+    @Path("/policydescr")
+    public Response policyRuleDescr(PolicyBaseDescr policyBaseDescr) {
+    	
+        return response(new String("OK"), Response.Status.OK.getStatusCode());
+        
     }
 
   

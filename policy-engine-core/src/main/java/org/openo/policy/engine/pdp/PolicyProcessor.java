@@ -15,15 +15,16 @@
  */
 package org.openo.policy.engine.pdp;
 
+import org.openo.policy.engine.model.PolicyId;
 import org.openo.policy.engine.pep.PolicyAction;
 
 public interface PolicyProcessor
 {
-    String getName();
+	PolicyId getPolicyId();
 
     void insert(Object fact);
-
-    void start();
+    
+    void newSession(String url);
 
     int fire();
 
@@ -31,7 +32,6 @@ public interface PolicyProcessor
 
     void destroy();
     
-    void setPolicyAction(PolicyAction action);
+    void setPolicyAction(String identifier,PolicyAction action);
 
-    void unregisterChannel();
 }
