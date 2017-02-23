@@ -13,26 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openo.policy.engine.pdp;
+package org.openo.policy.engine.cpc;
 
-import org.openo.policy.engine.model.PolicyId;
-import org.openo.policy.engine.pep.PolicyAction;
+import java.util.List;
 
-public interface PolicyProcessor
-{
+import org.openo.policy.engine.model.PolicyBaseDescr;
+import org.openo.policy.engine.pdp.PolicyProcessor;
+
+public interface PolicyControllerService {
 	
-	PolicyId getPolicyId();
+    PolicyProcessor getProcessor(String name);
 
-    void insert(Object fact);
+    List<PolicyProcessor> getProcessorList();
+
+    void newProcessRuntime(PolicyBaseDescr baseDescr);
     
-    void newSession(String url);
 
-    int fire();
-
-    void reload();
-
-    void destroy();
     
-    void setPolicyAction(String identifier,PolicyAction action);
-
 }

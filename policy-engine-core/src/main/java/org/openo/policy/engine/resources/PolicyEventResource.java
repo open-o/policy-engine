@@ -36,6 +36,7 @@ public class PolicyEventResource {
     public Response acceptPolicyEvent(PolicyEvent policyEvent) {
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());
+        
     }
     
     

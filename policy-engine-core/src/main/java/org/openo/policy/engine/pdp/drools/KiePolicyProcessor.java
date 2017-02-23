@@ -61,7 +61,8 @@ public class KiePolicyProcessor implements PolicyProcessor {
         KieRepository repository = kieServices.getRepository();  
         repository.addKieModule(kJar);  
         KieContainer kieContainer = kieServices.newKieContainer(releaseId);  
-        this.kieSession = kieContainer.newKieSession();  
+        this.kieSession = kieContainer.newKieSession(); 
+        logger.info("new PDP instance is start.  groupId:" + groupId + " artifactId:" +artifactId+ " version" + version);
 	}
 
 
