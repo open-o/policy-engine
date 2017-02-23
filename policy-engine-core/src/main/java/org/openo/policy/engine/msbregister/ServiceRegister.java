@@ -20,7 +20,7 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import com.eclipsesource.jaxrs.consumer.ConsumerFactory;
+import com.eclipsesource.jaxrs.consumer.ConsumerFactory;
 
 public class ServiceRegister implements Runnable {
 
@@ -66,9 +66,9 @@ public class ServiceRegister implements Runnable {
 	private boolean registerService() {
 		ClientConfig config = new ClientConfig();
 		try {
-//			MicroserviceBusRest resourceserviceproxy = ConsumerFactory.createConsumer(this.msbServerAddr, config,
-//					MicroserviceBusRest.class);
-//			resourceserviceproxy.registerServce("false", engineEntity);
+			MicroserviceBusRest resourceserviceproxy = ConsumerFactory.createConsumer(this.msbServerAddr, config,
+					MicroserviceBusRest.class);
+			resourceserviceproxy.registerServce("false", engineEntity);
 		} catch (Exception error) {
 			LOG.error("microservice register failed!" + error.getMessage());
 			return false;

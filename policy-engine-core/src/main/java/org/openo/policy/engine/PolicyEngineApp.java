@@ -50,7 +50,7 @@ public class PolicyEngineApp extends Application<PolicyEngineConfig> {
 
         environment.jersey().register(new PolicyEventResource());
         environment.jersey().register(new PolicyRuleResource());
-       // startRegisterService(configuration.getMsbServerAddr(),configuration.getServiceIp());
+        startRegisterService(configuration.getMsbServerAddr(),configuration.getServiceIp());
         initSwaggerConfig(configuration, environment);
     }
     
