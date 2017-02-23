@@ -17,10 +17,8 @@
 package org.openo.policy.engine.timer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.openo.policy.engine.timer.entity.ServerConfig;
-
 import io.dropwizard.Configuration;
+import org.openo.policy.engine.timer.entity.ServerConfig;
 
 public class TimerConfiguration extends Configuration {
 

@@ -17,10 +17,10 @@
 package org.openo.policy.engine.timer.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Map;
 
 public class TaskEnforcementRequest {
+
     @JsonProperty
     private String id;
 
