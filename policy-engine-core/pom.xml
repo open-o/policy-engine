@@ -149,11 +149,11 @@
         </dependency>
         
         <!-- consumer -->
-        <dependency>
+        <!--dependency>
             <groupId>com.eclipsesource.jaxrs</groupId>
             <artifactId>consumer</artifactId>
             <version>${jaxrs.consumer.version}</version>
-        </dependency>
+        </dependency-->
     </dependencies>
     
     <build>
