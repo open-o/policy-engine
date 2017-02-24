@@ -14,18 +14,9 @@
  * limitations under the License.
  */
 
-package org.openo.policy.engine.timer.scheduler;
+package org.openo.policy.engine.timer.entity.task;
 
 
-import org.jvnet.hk2.annotations.Contract;
-import org.openo.policy.engine.timer.entity.task.Task;
-
-@Contract
-public interface TaskScheduler<T extends Task> {
-
-    void addTask(T t);
-
-    void deleteTask(T t);
-
-    void updateTask(T t);
+public class RealTimeTask extends Task {
+    
 }
