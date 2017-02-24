@@ -16,16 +16,13 @@
 
 package org.openo.policy.engine.timer.entity.task;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.openo.policy.engine.timer.scheduler.TaskScheduler;
-
 import java.util.Map;
 
-public abstract class Task {
-    @JsonIgnore
-    private TaskScheduler<Task> taskScheduler;
+/**
+ * A Task entity that repentants a task. Task is a minimum execute unit.
+ */
+public class Task {
 
     @JsonProperty
     private String name;
@@ -41,10 +38,6 @@ public abstract class Task {
     private long startGMT;
     @JsonProperty
     private long endGMT;
-
-    public Task() {
-        taskScheduler = obtainScheduler();
-    }
 
     public String getName() {
         return name;
@@ -70,17 +63,4 @@ public abstract class Task {
         return parameters;
     }
 
-    public void start() {
-        taskScheduler.addTask(this);
-    }
-
-    public void stop() {
-        taskScheduler.deleteTask(this);
-    }
-
-    public void update() {
-        taskScheduler.updateTask(this);
-    }
-
-    protected abstract TaskScheduler<Task> obtainScheduler();
 }
