@@ -49,7 +49,6 @@ public class ServerConfig {
 
     @JsonIgnore
     public String getUrl() {
-        //todo add msb discover
         String url = "http://" + ip + ":" + port + uri;
         logger.info("service {} url is: {}", serviceName, url);
         return url;

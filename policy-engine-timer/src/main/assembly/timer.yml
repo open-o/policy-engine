@@ -1,3 +1,7 @@
+mqConfig:
+  brokerIp: ${ACTIVEMQ_ADDRESS:-10.92.243.53}
+  brokerPort: ${ACTIVEMQ_OPENWIRE_PORT:-61616}
+
 taskManagerServer:
   ip: 127.0.0.1
   port: 9423
