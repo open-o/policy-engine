@@ -13,20 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.open.policy.engine.enforcement;
 
-import io.dropwizard.Application;
-import io.dropwizard.setup.Environment;
-import org.open.policy.engine.enforcement.resources.TaskResource;
+package org.openo.policy.engine.enforcement.model;
 
-public class PolicyEnforcementApplication extends Application<PolicyEnforcementConfiguration>{
-    public static void main(String[] args) throws Exception {
-        new PolicyEnforcementApplication().run(args);
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.util.Map;
+
+public class Task {
+    @NotEmpty
+    private String id;
+    @NotEmpty
+    private String scriptName;
+    private Map<String, Object> parameters;
+
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public void run(PolicyEnforcementConfiguration conf, Environment env) throws Exception {
-        final TaskResource resource = new TaskResource();
-        env.jersey().register(resource);
+    public String getScriptName() {
+        return scriptName;
+    }
+
+    public Map<String, Object> getParameters() {
+        return parameters;
     }
 }

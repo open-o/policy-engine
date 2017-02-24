@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.open.policy.engine.enforcement;
+package org.openo.policy.engine.enforcement;
 
 import io.dropwizard.Configuration;
 
