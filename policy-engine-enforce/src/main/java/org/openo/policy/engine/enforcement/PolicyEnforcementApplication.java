@@ -15,18 +15,23 @@
  */
 package org.openo.policy.engine.enforcement;
 
-import io.dropwizard.Application;
-import io.dropwizard.setup.Environment;
-import org.openo.policy.engine.enforcement.resources.TaskResource;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
+import io.dropwizard.setup.Bootstrap;
+import org.openo.dropwizard.ioc.bundle.IOCApplication;
 
-public class PolicyEnforcementApplication extends Application<PolicyEnforcementConfiguration>{
+public class PolicyEnforcementApplication extends IOCApplication<PolicyEnforcementConfiguration> {
     public static void main(String[] args) throws Exception {
         new PolicyEnforcementApplication().run(args);
     }
 
     @Override
-    public void run(PolicyEnforcementConfiguration conf, Environment env) throws Exception {
-        final TaskResource resource = new TaskResource();
-        env.jersey().register(resource);
+    public void initialize(Bootstrap<PolicyEnforcementConfiguration> bootstrap) {
+        super.initialize(bootstrap);
+        bootstrap.setConfigurationSourceProvider(
+                new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
+                        new EnvironmentVariableSubstitutor(false)
+                )
+        );
     }
 }

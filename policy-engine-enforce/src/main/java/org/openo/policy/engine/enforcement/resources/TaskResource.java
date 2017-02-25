@@ -15,6 +15,7 @@
  */
 package org.openo.policy.engine.enforcement.resources;
 
+import org.jvnet.hk2.annotations.Service;
 import org.openo.policy.engine.enforcement.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ import javax.ws.rs.core.Response;
 
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
+@Service
 public class TaskResource {
     private static final Logger logger = LoggerFactory.getLogger(TaskResource.class);
 
