@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package org.openo.policy.engine.timer;
+package org.openo.policy.engine.timer.service.retrofit;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.Configuration;
-import org.openo.policy.engine.timer.entity.MqConfig;
-import org.openo.policy.engine.timer.entity.ServerConfig;
+import retrofit2.Retrofit;
 
-public class TimerConfiguration extends Configuration {
+public class RetrofitClientBuilder {
 
-    @JsonProperty("taskManagerServer")
-    private ServerConfig taskManagerServer;
+    private RetrofitClientBuilder() {
+    }
 
-    @JsonProperty("taskEnforcementServer")
-    private ServerConfig taskEnforcementServer;
-
-    @JsonProperty("mqConfig")
-    private MqConfig mqConfig;
+    public static <T> T build(String host, Class<T> tClass) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(host.endsWith("/") ? host : host + "/")
+                .build();
+        return retrofit.create(tClass);
+    }
 }
