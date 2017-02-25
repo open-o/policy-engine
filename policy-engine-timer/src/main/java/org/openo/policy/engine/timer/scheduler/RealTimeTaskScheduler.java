@@ -17,11 +17,15 @@
 package org.openo.policy.engine.timer.scheduler;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import org.jvnet.hk2.annotations.Service;
 import org.openo.policy.engine.timer.entity.task.RealTimeTask;
 import org.openo.policy.engine.timer.executor.TaskExecutor;
 
 @Service
+@Singleton
+@Named("realTimeTask")
 public class RealTimeTaskScheduler implements TaskScheduler<RealTimeTask> {
 
     private TaskExecutor taskExecutor;
