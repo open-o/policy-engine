@@ -22,6 +22,8 @@ public class BackupDbPolicyAction implements PolicyAction{
 	@Override
 	public void executeAction(Object jb) {
 		
+		System.out.println("Backup Periodic Test!!!");
+		
 	}
 
 	@Override

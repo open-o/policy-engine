@@ -16,17 +16,22 @@
 package org.openo.policy.engine.resources;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.openo.policy.engine.cpc.PolicyControllerService;
+import org.openo.policy.engine.cpc.PolicyControllerServiceImpl;
 import org.openo.policy.engine.model.PolicyDescription;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 
 public class PolicyRuleResourceTest {
+	
+	private static final PolicyControllerService controllerService = mock(PolicyControllerService.class);
 
 	private static PolicyDescription policyDescription;
 
@@ -37,7 +42,7 @@ public class PolicyRuleResourceTest {
 	}
 
 	@ClassRule
-	public static ResourceTestRule resources = ResourceTestRule.builder().addResource(new PolicyRuleResource()).build();
+	public static ResourceTestRule resources = ResourceTestRule.builder().addResource(new PolicyRuleResource(controllerService)).build();
 
 	@Test
 	public void test() {

@@ -28,6 +28,8 @@ public interface PolicyProcessor
     void newSession(String url);
 
     int fire();
+    
+    void start();
 
     void reload();
 

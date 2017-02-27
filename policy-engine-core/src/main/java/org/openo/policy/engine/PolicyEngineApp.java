@@ -15,6 +15,8 @@
  */
 package org.openo.policy.engine;
 
+import org.openo.policy.engine.cpc.PolicyControllerService;
+import org.openo.policy.engine.cpc.PolicyControllerServiceImpl;
 import org.openo.policy.engine.msbregister.ServiceRegister;
 import org.openo.policy.engine.resources.PolicyEventResource;
 import org.openo.policy.engine.resources.PolicyRuleResource;
@@ -48,8 +50,9 @@ public class PolicyEngineApp extends Application<PolicyEngineConfig> {
     @Override
     public void run(PolicyEngineConfig configuration,  Environment environment) {
 
-        environment.jersey().register(new PolicyEventResource());
-        environment.jersey().register(new PolicyRuleResource());
+    	PolicyControllerService controllerService = new PolicyControllerServiceImpl();
+        environment.jersey().register(new PolicyEventResource(controllerService));
+        environment.jersey().register(new PolicyRuleResource(controllerService));
         startRegisterService(configuration.getMsbServerAddr(),configuration.getServiceIp());
         initSwaggerConfig(configuration, environment);
     }

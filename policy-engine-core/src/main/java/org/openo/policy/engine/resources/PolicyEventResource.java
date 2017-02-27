@@ -21,8 +21,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.openo.policy.engine.cpc.PolicyControllerService;
 import org.openo.policy.engine.model.GenericAlarmEvent;
 import org.openo.policy.engine.model.PolicyEvent;
+import org.openo.policy.engine.pdp.PolicyProcessor;
 
 import io.swagger.annotations.Api;
 
@@ -30,6 +32,12 @@ import io.swagger.annotations.Api;
 @Produces({MediaType.APPLICATION_JSON})
 @Api(tags = {"Policy Engine API"})
 public class PolicyEventResource {
+	
+	private PolicyControllerService controllerService;
+	
+	public PolicyEventResource(PolicyControllerService controllerService){
+		this.controllerService = controllerService;
+	}
 	
     @POST
     @Path("/policyevent")
@@ -43,6 +51,10 @@ public class PolicyEventResource {
     @POST
     @Path("/alarm")
     public Response acceptPolicyEvent(GenericAlarmEvent genericAlarmEvent) {
+    	
+    	PolicyProcessor policyProcessor = controllerService.getProcessor(genericAlarmEvent.getNsId());
+    	policyProcessor.insert(genericAlarmEvent);
+    	policyProcessor.fire();
        
         return response(new String("OK"), Response.Status.OK.getStatusCode());
     }

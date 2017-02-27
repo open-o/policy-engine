@@ -28,7 +28,7 @@ import org.openo.policy.engine.pep.PolicyAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class KiePolicyProcessor implements PolicyProcessor {
+public class KiePolicyProcessor implements PolicyProcessor,Runnable {
 	
 	private final Logger logger = LoggerFactory.getLogger(KiePolicyProcessor.class.getName());
 
@@ -37,6 +37,8 @@ public class KiePolicyProcessor implements PolicyProcessor {
 	private KieServices kieServices;
 
 	private KieSession kieSession;
+	
+	private Thread workThread;
 
 
 	public KiePolicyProcessor(PolicyId policyId) {
@@ -74,8 +76,9 @@ public class KiePolicyProcessor implements PolicyProcessor {
 
 	@Override
 	public int fire() {
-		return this.kieSession.fireAllRules();
-	
+		
+         return this.kieSession.fireAllRules();
+         
 	}
 
 	@Override
@@ -94,6 +97,7 @@ public class KiePolicyProcessor implements PolicyProcessor {
 	public void setPolicyAction(String identifier,PolicyAction action) {
 		if(action != null){
 			this.kieSession.setGlobal(identifier, action);
+//			this.kieSession.registerChannel(identifier, new TestChannel());
 		}
 	}
 
@@ -101,6 +105,22 @@ public class KiePolicyProcessor implements PolicyProcessor {
 	public PolicyId getPolicyId() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void run() {
+		
+		if(kieSession != null){
+			kieSession.fireUntilHalt();
+		}
+		
+	}
+
+	@Override
+	public void start() {
+		workThread = new Thread(this);
+		workThread.start();
+		
 	}
 
 	

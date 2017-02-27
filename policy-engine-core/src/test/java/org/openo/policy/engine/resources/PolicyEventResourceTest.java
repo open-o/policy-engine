@@ -22,11 +22,17 @@ import javax.ws.rs.core.Response;
 
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.openo.policy.engine.cpc.PolicyControllerService;
+import org.openo.policy.engine.cpc.PolicyControllerServiceImpl;
 import org.openo.policy.engine.model.PolicyEvent;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 
 public class PolicyEventResourceTest {
+	
+	private static final PolicyControllerService controllerService = mock(PolicyControllerService.class);
 
 	private static PolicyEvent PolicyEvent;
 
@@ -39,7 +45,7 @@ public class PolicyEventResourceTest {
 	}
 
 	@ClassRule
-	public static ResourceTestRule resources = ResourceTestRule.builder().addResource(new PolicyEventResource()).build();
+	public static ResourceTestRule resources = ResourceTestRule.builder().addResource(new PolicyEventResource(controllerService)).build();
 
 	@Test
 	public void test() {

@@ -22,6 +22,8 @@ public class ScaleNsPolicyAction implements PolicyAction{
 	@Override
 	public void executeAction(Object jb) {
 		
+		String str = (String)jb;
+		 System.out.println("ScaleNsPolicyAction executAction: " + str);
 	}
 
 	@Override

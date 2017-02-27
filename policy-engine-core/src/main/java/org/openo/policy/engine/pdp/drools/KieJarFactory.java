@@ -32,7 +32,7 @@ public class KieJarFactory {
     public static InternalKieModule createKieJar(KieServices ks, ReleaseId releaseId, ResourceWrapper resourceWrapper) {  
         KieFileSystem kfs = createKieFileSystemWithKProject(ks, true);  
         kfs.writePomXML(getPom(releaseId));  
-        kfs.write("src/main/resources/" + resourceWrapper.getTargetResourceName(), resourceWrapper.getResource());  
+        kfs.write("src/main/resources/" + resourceWrapper.getTargetResourceName()+".drl", resourceWrapper.getResource());  
         KieBuilder kieBuilder = ks.newKieBuilder(kfs);  
         if (!kieBuilder.getResults().getMessages().isEmpty()) {  
             System.out.println(kieBuilder.getResults().getMessages());  

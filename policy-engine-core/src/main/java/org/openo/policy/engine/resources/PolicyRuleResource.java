@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jvnet.hk2.annotations.Service;
+import org.openo.policy.engine.cpc.PolicyControllerService;
 import org.openo.policy.engine.model.PolicyBaseDescr;
 import org.openo.policy.engine.model.PolicyDescription;
 
@@ -35,6 +36,12 @@ import io.swagger.annotations.Api;
 @Service
 public class PolicyRuleResource {
 
+	private PolicyControllerService controllerService;
+	
+	public PolicyRuleResource(PolicyControllerService controllerService){
+		
+		this.controllerService = controllerService;
+	}
 
     @POST
     @Path("/policyinfo")
@@ -48,7 +55,7 @@ public class PolicyRuleResource {
     @POST
     @Path("/policydescr")
     public Response policyRuleDescr(PolicyBaseDescr policyBaseDescr) {
-    	
+    	controllerService.newProcessRuntime(policyBaseDescr);
         return response(new String("OK"), Response.Status.OK.getStatusCode());
         
     }

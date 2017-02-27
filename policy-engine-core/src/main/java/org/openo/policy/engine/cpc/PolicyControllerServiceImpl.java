@@ -15,8 +15,10 @@
  */
 package org.openo.policy.engine.cpc;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.openo.policy.engine.model.PolicyBaseDescr;
@@ -28,11 +30,23 @@ import org.openo.policy.engine.pep.PolicyActionFactory;
 public class PolicyControllerServiceImpl implements PolicyControllerService{
 	
 	private Map<PolicyId,PolicyProcessor>  rumtimeMap = new ConcurrentHashMap<>();
+	
+	public PolicyControllerServiceImpl(){}
 
 	@Override
 	public PolicyProcessor getProcessor(String name) {
-	
-		return null;
+		  PolicyProcessor  processor = null;
+		  Iterator<Entry<PolicyId, PolicyProcessor>> iter = rumtimeMap.entrySet().iterator();
+		  while (iter.hasNext()) {
+		   Entry<PolicyId, PolicyProcessor> entry = iter.next();
+		   PolicyId  policyId= entry.getKey();
+		   if(policyId.getNsId().equals(name)){
+	          processor = entry.getValue();
+	             break;
+	       }
+		
+         }
+		return processor;
 	}
 
 	@Override
@@ -50,6 +64,9 @@ public class PolicyControllerServiceImpl implements PolicyControllerService{
 		processor.newSession(baseDescr.getFileUrl());
 		processor.setPolicyAction(baseDescr.getActionName(), PolicyActionFactory.newActionInstance(baseDescr.getActionName()));
 		rumtimeMap.put(policyId, processor);
+		if(policyId.getArtifactId().startsWith("timer")){
+			processor.start();
+		}
 		
 	}
 	
