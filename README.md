@@ -5,7 +5,7 @@ Within the OPEN-O architecture, there are a lot of microservices, e.g., Catalog,
 
 ##Run
 
-1. Install 1.8 or higer version of JDK
+1. Install 1.8
 1. export JAVA_HOME= "$JAVA_INSTALLATION_PATH" , please replace $JAVA_INSTALLATION_PATH with the JDK installation directory on your host
 1. Compile form source or download the latest snapshot from https://nexus.open-o.org/content/repositories/snapshots/org/openo/common-services/microservice-bus/msb-core-standalone/1.0.0-SNAPSHOT/
 

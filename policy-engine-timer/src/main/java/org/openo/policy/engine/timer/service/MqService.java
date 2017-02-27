@@ -16,20 +16,16 @@
 
 package org.openo.policy.engine.timer.service;
 
-import java.util.Optional;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.jvnet.hk2.annotations.Service;
 import org.openo.policy.engine.timer.entity.MqConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import javax.jms.*;
+import java.util.Optional;
 
 @Service
 @Singleton
