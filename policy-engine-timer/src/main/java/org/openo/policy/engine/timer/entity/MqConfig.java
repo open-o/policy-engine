@@ -18,6 +18,7 @@ package org.openo.policy.engine.timer.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class MqConfig {
 
@@ -25,10 +26,28 @@ public class MqConfig {
     }
 
     @JsonProperty
+    @NotEmpty
     private String brokerIp;
 
     @JsonProperty
+    @NotEmpty
     private String brokerPort;
+
+    @JsonProperty
+    @NotEmpty
+    private String addTopicName;
+
+    @JsonProperty
+    @NotEmpty
+    private String deleteTopicName;
+
+    @JsonProperty
+    @NotEmpty
+    private String updateTopicName;
+
+    @JsonProperty
+    @NotEmpty
+    private String reportQueueName;
 
     public String getBrokerIp() {
         return brokerIp;

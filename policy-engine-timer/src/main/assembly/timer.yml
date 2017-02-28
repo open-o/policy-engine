@@ -1,6 +1,10 @@
 mqConfig:
   brokerIp: ${ACTIVEMQ_ADDRESS:-10.92.243.53}
   brokerPort: ${ACTIVEMQ_OPENWIRE_PORT:-61616}
+  addTopicName: TaskManager.tasks.add
+  deleteTopicName: TaskManager.tasks.delete
+  updateTopicName: TaskManager.tasks.update
+  reportQueueName: TaskManager.tasks.report
 
 taskManagerServer:
   ip: 127.0.0.1
