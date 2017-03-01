@@ -27,6 +27,16 @@ public class Task {
     private String scriptName;
     private Map<String, Object> parameters;
 
+    public Task() {
+        super();
+    }
+
+    public Task(String id, String scriptName, Map<String, Object> parameters) {
+        this.id = id;
+        this.scriptName = scriptName;
+        this.parameters = parameters;
+    }
+
     public String getId() {
         return id;
     }
